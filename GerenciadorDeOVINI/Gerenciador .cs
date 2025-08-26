@@ -33,6 +33,19 @@ namespace GerenciadorDeOVINI
          lblSituacao.Text = $"Situação:{(ovni.Situacao ? "Ligado" : "Desligado")}";
          lblPlaneta.Text = $"Planeta Atual:{ovni.PlanetaAtual}";
          cmbPlanetas.Text = ovni.PlanetaAtual;
+            if (ovni.PlanetaAtual == "Terra")
+
+            // Mudar a imagem:
+            {
+                pibTerra.Image = Properties.Resources.terra;
+
+            }
+            else 
+            {
+             pibTerra.Image = null;
+            }
+          
+
            
             // Atualizar os Botões ligar e Desligar:
             btnDesligar.Enabled = ovni.Situacao;
@@ -43,6 +56,11 @@ namespace GerenciadorDeOVINI
             grbPlaneta.Enabled = ovni.Situacao;
             grbTripulantes.Enabled = ovni.Situacao;
         }   
+           
+            
+        
+        
+    
        
 
         private void btnLigar_Click(object sender, EventArgs e)
@@ -80,6 +98,86 @@ namespace GerenciadorDeOVINI
             // Atualizar as informações
             Atualizarinformacoes();
         }
+
+        private void btnAdicionarTripulantes_Click(object sender, EventArgs e)
+        {
+            if (ovni.AdicionarTripulante())
+            {
+                MessageBox.Show("Tripulantes Adicionado!",
+               "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("A nave já esta lotada de Tripulantes!",
+               "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void btnRemoverTripulantes_Click(object sender, EventArgs e)
+        {
+            if (ovni.RemoverTripulante())
+            {
+                MessageBox.Show("Tripulantes Removido!",
+               "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Não é possivel mais Remover Tripulantes!",
+               "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Atualizarinformacoes();
+
+
+        }
+
+        private void btnAdicionarAbduzidos_Click(object sender, EventArgs e)
+        {
+            if (ovni.Abduzir())
+            {
+                MessageBox.Show("algo Foi Extremamente Abduzido!",
+               "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show(" nao foi possivel abduzir!",
+               "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Atualizarinformacoes();
+
+        }
+
+        private void btnRemoverAbduzidos_Click(object sender, EventArgs e)
+        {
+            if (ovni.Desabduzir())
+            {
+                MessageBox.Show("o Ser foi possivel ser Desabiduzidos!",
+               "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }                                                      
+            else
+            {
+                MessageBox.Show(" nao foi possivel abduzir!",
+               "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Atualizarinformacoes();
+        }
+
+        private void btnMudarDePlaneta_Click(object sender, EventArgs e)
+        {
+            if (ovni.MudarPlaneta(cmbPlanetas.Text)) 
+            {
+                MessageBox.Show("Você mudou de Planeta!",
+               "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show(" Não foi possivel mudar de Planeta!",
+               "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Atualizarinformacoes();
+        }
     }
     }
+    
+    
 
